@@ -11,7 +11,7 @@ class BlogController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')->paginate(5);
 
-        return view('pages.home', compact($posts));
+        return view('pages.home')->with('posts', $posts);
     }
 
     public function getApi($link)
