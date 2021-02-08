@@ -21,6 +21,6 @@ class BlogController extends Controller
     public function single($slug)
     {
         $post = Post::where('slug', $slug)->first();
-        return view('posts.single', compact($post));
+        return view('posts.single')->with('post', $post);
     }
 }

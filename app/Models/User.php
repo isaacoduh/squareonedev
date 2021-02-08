@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -40,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getIsAdminAttribute()
+    {
+        return $this->role_id === 1;
+    }
+
+    public function getIsUserAttribute()
+    {
+        return $this->role_id === 0;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

@@ -9,7 +9,7 @@
 
         @forelse ($posts as $post)
             <li>
-                <h1 class="post-title"><a href="{{route('blog.single',$post->single)}}" title="{{$post->title}}">{{$post->title}}</a></h1>
+                <h1 class="post-title"><a href="{{route('blog.single',['slug' => $post->slug])}}" title="{{$post->title}}">{{$post->title}}</a></h1>
                 <aside>
                     <ul>
                         <li>
@@ -17,8 +17,8 @@
                         </li>
                     </ul>
                 </aside>
-                <p>{{str_limit($post->body, $limit = 100, $end = '....')}}</p>
-                <a href="{{route('blog.single', $post->single)}}">Read More</a>
+                <p>{{Str::limit($post->body, $limit = 100, $end = '....')}}</p>
+                <a href="{{route('blog.single', $post->slug)}}">Read More</a>
             </li>
         @empty
         <li><h1>No posts yet!</h1></li>

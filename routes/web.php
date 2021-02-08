@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,13 @@ Route::get('/', [BlogController::class, 'index']);
 Route::get('/home', [BlogController::class, 'index']);
 
 Route::get('/blog/{slug}', [BlogController::class, 'single'])->name('blog.single');
+
+Route::get('/admin/posts', [PostController::class, 'index']);
+Route::get('/user/posts', [PostController::class, 'myposts']);
+Route::resource('post', PostController::class);
+
+
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
