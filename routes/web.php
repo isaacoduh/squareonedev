@@ -25,8 +25,11 @@ Route::get('/home', [BlogController::class, 'index']);
 
 Route::get('/blog/{slug}', [BlogController::class, 'single'])->name('blog.single');
 
+Route::get('/feed', [BlogController::class, 'feed']);
+
 Route::get('/admin/posts', [PostController::class, 'index']);
 Route::get('/user/posts', [PostController::class, 'myposts']);
+
 Route::resource('post', PostController::class);
 
 
