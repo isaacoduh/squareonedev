@@ -10,13 +10,17 @@ use Illuminate\Http\Response;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(5);
+
+        $posts = Cache::remember('posts', 60, function () {
+            return Post::orderBy('id', 'desc')->paginate(15);
+        });
 
         return view('pages.home')->with('posts', $posts);
     }

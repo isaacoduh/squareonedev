@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Response;
 
 class PostController extends Controller
@@ -22,7 +23,9 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $posts = Cache::remember('posts', 60, function () {
+            return Post::orderBy('id', 'desc')->paginate(15);
+        });
         return view('admin.posts.index')->with('posts', $posts);
     }
 
